@@ -76,10 +76,12 @@
       adBox.style.display = "none";
     }
 
-    // Khi video bắt đầu chạy → đếm 5 giây rồi hiện quảng cáo
-    video.onplay = function() {
-      setTimeout(showAd, 5000); // hiện sau 5 giây
-    };
+    // Chỉ hiện quảng cáo sau khi video đã chạy được 5 giây
+    video.addEventListener("timeupdate", function() {
+      if (video.currentTime >= 5 && adBox.style.display === "none") {
+        showAd();
+      }
+    });
 
     // Khi nhấn nút X → chuyển tới Shopee
     closeBtn.onclick = function() {
