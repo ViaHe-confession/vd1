@@ -67,22 +67,24 @@
     const adBox = document.getElementById("adBox");
     const closeBtn = document.getElementById("closeBtn");
 
-    // Hàm hiển thị quảng cáo
     function showAd() {
       adBox.style.display = "flex";
     }
 
-    // Hiện quảng cáo ngay khi vừa vào trang
+    function hideAd() {
+      adBox.style.display = "none";
+    }
+
+    // Hiện quảng cáo ngay khi vào trang
     window.onload = function() {
       showAd();
+      setInterval(showAd, 120000); // lặp lại mỗi 2 phút
     };
 
     // Khi nhấn nút X → chuyển tới Shopee
     closeBtn.onclick = function() {
-      adBox.style.display = "none";
+      hideAd();
       window.location.href = "https://shorten.asia/JbGTS2fv";
-      // Sau 2 phút lại hiện quảng cáo
-      setTimeout(showAd, 120000);
     };
   </script>
 </body>
