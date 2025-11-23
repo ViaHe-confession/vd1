@@ -11,24 +11,27 @@
       color: #fff;
       text-align: center;
     }
-    /* Khung quảng cáo lớn hơn, nhưng không phủ toàn màn hình */
+    /* Khung quảng cáo to, che video */
     #adBox {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 70%;   /* rộng hơn */
-      background: rgba(255, 255, 255, 0.95);
+      width: 80%;
+      background: rgba(255, 255, 255, 0.97);
       color: #000;
-      padding: 40px;
+      padding: 50px;
       border-radius: 12px;
-      box-shadow: 0 0 15px #000;
-      display: none;
+      box-shadow: 0 0 20px #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 999;
     }
     #adContent {
       position: relative;
       text-align: center;
+      width: 100%;
     }
     #closeBtn {
       position: absolute;
@@ -38,16 +41,29 @@
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
     }
     #adContent h2 {
       margin-top: 0;
-      font-size: 28px;
+      font-size: 32px;
       color: #e60000;
+    }
+    #dealBtn {
+      background: #ff6600;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    #dealBtn:hover {
+      background: #e65c00;
     }
   </style>
 </head>
@@ -60,17 +76,18 @@
   <div id="adBox">
     <div id="adContent">
       <button id="closeBtn">X</button>
-      <h2>🔥 Khuyến mãi HOT 🔥</h2>
-      <p>Ưu đãi đặc biệt dành cho bạn, đừng bỏ lỡ!</p>
+      <h2>🔥 Khuyến mãi hót 🔥</h2>
+      <button id="dealBtn">Nhận ngay ưu đãi</button>
     </div>
   </div>
 
   <script>
     const adBox = document.getElementById("adBox");
     const closeBtn = document.getElementById("closeBtn");
+    const dealBtn = document.getElementById("dealBtn");
 
     function showAd() {
-      adBox.style.display = "block";
+      adBox.style.display = "flex";
     }
 
     function hideAd() {
@@ -85,8 +102,13 @@
     // Khi nhấn nút X → tắt quảng cáo, chuyển sang Shopee, và hẹn lại sau 2 phút
     closeBtn.onclick = function() {
       hideAd();
-      window.location.href = "https://shorten.asia/JbGTS2fv"; // link Shopee
+      window.location.href = "https://shorten.asia/JbGTS2fv";
       setTimeout(showAd, 120000); // hiện lại sau 2 phút
+    };
+
+    // Khi nhấn nút "Nhận ngay ưu đãi" → chuyển sang Shopee
+    dealBtn.onclick = function() {
+      window.location.href = "https://shorten.asia/JbGTS2fv";
     };
   </script>
 </body>
