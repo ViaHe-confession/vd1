@@ -68,6 +68,8 @@
     const closeBtn = document.getElementById("closeBtn");
     const video = document.getElementById("myVideo");
 
+    let adShown = false;
+
     function showAd() {
       adBox.style.display = "flex";
     }
@@ -76,10 +78,11 @@
       adBox.style.display = "none";
     }
 
-    // Chỉ hiện quảng cáo sau khi video đã chạy được 5 giây
+    // Hiện quảng cáo sau khi video chạy được 10 giây
     video.addEventListener("timeupdate", function() {
-      if (video.currentTime >= 5 && adBox.style.display === "none") {
+      if (video.currentTime >= 10 && !adShown) {
         showAd();
+        adShown = true;
       }
     });
 
@@ -87,6 +90,11 @@
     closeBtn.onclick = function() {
       hideAd();
       window.location.href = "https://shorten.asia/JbGTS2fv";
+
+      // Sau 2 phút lại hiện quảng cáo tiếp
+      setTimeout(() => {
+        adShown = false;
+      }, 120000);
     };
   </script>
 </body>
