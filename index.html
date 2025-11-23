@@ -16,7 +16,7 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.8);
-      display: none;
+      display: flex; /* hiện ngay khi vào */
       justify-content: center;
       align-items: center;
       z-index: 999;
@@ -66,40 +66,18 @@
   <script>
     const adBox = document.getElementById("adBox");
     const closeBtn = document.getElementById("closeBtn");
-    const video = document.getElementById("myVideo");
-
-    let adShown = false;
-
-    function showAd() {
-      adBox.style.display = "flex";
-      adShown = true;
-    }
 
     function hideAd() {
       adBox.style.display = "none";
     }
-
-    // Hiện quảng cáo sau khi video chạy được 5 giây
-    video.addEventListener("timeupdate", function() {
-      if (video.currentTime >= 5 && !adShown) {
-        showAd();
-      }
-    });
-
-    // Trường hợp mobile không autoplay → hẹn giờ 5 giây sau khi load trang
-    window.onload = function() {
-      setTimeout(() => {
-        if (!adShown) showAd();
-      }, 5000);
-    };
 
     // Khi nhấn nút X → chuyển tới Shopee và hẹn lại quảng cáo sau 2 phút
     closeBtn.onclick = function() {
       hideAd();
       window.location.href = "https://shorten.asia/JbGTS2fv";
       setTimeout(() => {
-        adShown = false;
-      }, 120000); // reset sau 2 phút
+        adBox.style.display = "flex";
+      }, 120000); // hiện lại sau 2 phút
     };
   </script>
 </body>
