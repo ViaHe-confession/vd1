@@ -11,25 +11,24 @@
       color: #fff;
       text-align: center;
     }
+    /* Khung quảng cáo lớn hơn, nhưng không phủ toàn màn hình */
     #adBox {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex; /* hiện ngay khi vào */
-      justify-content: center;
-      align-items: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;   /* rộng hơn */
+      background: rgba(255, 255, 255, 0.95);
+      color: #000;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #000;
+      display: none;
       z-index: 999;
     }
     #adContent {
       position: relative;
-      background: #fff;
-      color: #000;
-      padding: 30px 20px 20px;
-      border-radius: 8px;
-      max-width: 320px;
       text-align: center;
-      box-shadow: 0 0 10px #000;
     }
     #closeBtn {
       position: absolute;
@@ -39,13 +38,16 @@
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       font-weight: bold;
+      font-size: 18px;
       cursor: pointer;
     }
     #adContent h2 {
       margin-top: 0;
+      font-size: 28px;
+      color: #e60000;
     }
   </style>
 </head>
@@ -58,8 +60,8 @@
   <div id="adBox">
     <div id="adContent">
       <button id="closeBtn">X</button>
-      <h2>🎉 Khuyến mãi đặc biệt!</h2>
-      <p>Click vào dấu X để xem sản phẩm hot trên Shopee!</p>
+      <h2>🔥 Khuyến mãi HOT 🔥</h2>
+      <p>Ưu đãi đặc biệt dành cho bạn, đừng bỏ lỡ!</p>
     </div>
   </div>
 
@@ -67,17 +69,24 @@
     const adBox = document.getElementById("adBox");
     const closeBtn = document.getElementById("closeBtn");
 
+    function showAd() {
+      adBox.style.display = "block";
+    }
+
     function hideAd() {
       adBox.style.display = "none";
     }
 
-    // Khi nhấn nút X → chuyển tới Shopee và hẹn lại quảng cáo sau 2 phút
+    // Hiện quảng cáo ngay khi vào trang
+    window.onload = function() {
+      showAd();
+    };
+
+    // Khi nhấn nút X → tắt quảng cáo, chuyển sang Shopee, và hẹn lại sau 2 phút
     closeBtn.onclick = function() {
       hideAd();
-      window.location.href = "https://shorten.asia/JbGTS2fv";
-      setTimeout(() => {
-        adBox.style.display = "flex";
-      }, 120000); // hiện lại sau 2 phút
+      window.location.href = "https://shorten.asia/JbGTS2fv"; // link Shopee
+      setTimeout(showAd, 120000); // hiện lại sau 2 phút
     };
   </script>
 </body>
