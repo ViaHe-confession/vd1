@@ -79,18 +79,18 @@
       adBox.style.display = "none";
     }
 
-    // Kiểm tra video chạy đủ 10 giây
+    // Hiện quảng cáo sau khi video chạy được 5 giây
     video.addEventListener("timeupdate", function() {
-      if (video.currentTime >= 10 && !adShown) {
+      if (video.currentTime >= 5 && !adShown) {
         showAd();
       }
     });
 
-    // Trường hợp mobile không autoplay → hẹn giờ 10 giây sau khi load trang
+    // Trường hợp mobile không autoplay → hẹn giờ 5 giây sau khi load trang
     window.onload = function() {
       setTimeout(() => {
         if (!adShown) showAd();
-      }, 10000);
+      }, 5000);
     };
 
     // Khi nhấn nút X → chuyển tới Shopee và hẹn lại quảng cáo sau 2 phút
