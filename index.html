@@ -50,7 +50,7 @@
   </style>
 </head>
 <body>
-  <video id="myVideo" width="100%" controls autoplay>
+  <video id="myVideo" width="100%" controls autoplay playsinline>
     <source src="video.mp4" type="video/mp4">
     Trình duyệt của bạn không hỗ trợ video.
   </video>
@@ -72,29 +72,34 @@
 
     function showAd() {
       adBox.style.display = "flex";
+      adShown = true;
     }
 
     function hideAd() {
       adBox.style.display = "none";
     }
 
-    // Hiện quảng cáo sau khi video chạy được 10 giây
+    // Kiểm tra video chạy đủ 10 giây
     video.addEventListener("timeupdate", function() {
       if (video.currentTime >= 10 && !adShown) {
         showAd();
-        adShown = true;
       }
     });
 
-    // Khi nhấn nút X → chuyển tới Shopee
+    // Trường hợp mobile không autoplay → hẹn giờ 10 giây sau khi load trang
+    window.onload = function() {
+      setTimeout(() => {
+        if (!adShown) showAd();
+      }, 10000);
+    };
+
+    // Khi nhấn nút X → chuyển tới Shopee và hẹn lại quảng cáo sau 2 phút
     closeBtn.onclick = function() {
       hideAd();
       window.location.href = "https://shorten.asia/JbGTS2fv";
-
-      // Sau 2 phút lại hiện quảng cáo tiếp
       setTimeout(() => {
         adShown = false;
-      }, 120000);
+      }, 120000); // reset sau 2 phút
     };
   </script>
 </body>
