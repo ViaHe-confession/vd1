@@ -27,6 +27,11 @@
       justify-content: center;
       align-items: center;
       z-index: 999;
+      opacity: 0;
+      transition: opacity 0.8s ease; /* hiệu ứng fade-in */
+    }
+    #adBox.show {
+      opacity: 1;
     }
     #adContent {
       position: relative;
@@ -72,17 +77,19 @@
   </style>
 </head>
 <body>
-  <video id="myVideo" width="100%" controls autoplay playsinline>
+  <!-- Video không autoplay -->
+  <video id="myVideo" width="100%" controls playsinline>
     <source src="video.mp4" type="video/mp4">
     Trình duyệt của bạn không hỗ trợ video.
   </video>
 
+  <!-- Khung quảng cáo -->
   <div id="adBox">
     <div id="adContent">
       <button id="closeBtn">X</button>
       <h2>🔥 Khuyến mãi HOT 🔥</h2>
       <p>Ưu đãi đặc biệt dành cho bạn, đừng bỏ lỡ!</p>
-      <button id="dealBtn">Nhận ngay ưu đãi</button>
+      <button id="dealBtn">Nhận khuyến mại</button>
     </div>
   </div>
 
@@ -93,13 +100,17 @@
 
     function showAd() {
       adBox.style.display = "flex";
+      setTimeout(() => adBox.classList.add("show"), 50); // bật hiệu ứng fade-in
+      localStorage.setItem("adShown", "true"); // lưu trạng thái để fix reload
     }
 
     function hideAd() {
-      adBox.style.display = "none";
+      adBox.classList.remove("show");
+      setTimeout(() => adBox.style.display = "none", 500);
+      localStorage.setItem("adShown", "false");
     }
 
-    // Hiện quảng cáo ngay khi vào trang
+    // Hiện quảng cáo ngay khi vào trang (fix lỗi reload)
     window.onload = function() {
       showAd();
     };
@@ -111,7 +122,7 @@
       setTimeout(showAd, 120000); // hiện lại sau 2 phút
     };
 
-    // Khi nhấn nút "Nhận ngay ưu đãi" → chuyển sang Shopee
+    // Khi nhấn nút "Nhận khuyến mại" → chuyển sang Shopee
     dealBtn.onclick = function() {
       window.location.href = "https://shorten.asia/JbGTS2fv";
     };
