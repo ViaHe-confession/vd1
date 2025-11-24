@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Video Quảng Cáo</title>
+  <title>Video hot</title>
   <style>
     body {
       margin: 0;
@@ -28,7 +28,7 @@
       align-items: center;
       z-index: 999;
       opacity: 0;
-      transition: opacity 0.8s ease; /* hiệu ứng fade-in */
+      transition: opacity 0.8s ease;
     }
     #adBox.show {
       opacity: 1;
@@ -100,8 +100,8 @@
 
     function showAd() {
       adBox.style.display = "flex";
-      setTimeout(() => adBox.classList.add("show"), 50); // bật hiệu ứng fade-in
-      localStorage.setItem("adShown", "true"); // lưu trạng thái để fix reload
+      setTimeout(() => adBox.classList.add("show"), 50);
+      localStorage.setItem("adShown", "true");
     }
 
     function hideAd() {
@@ -110,22 +110,21 @@
       localStorage.setItem("adShown", "false");
     }
 
-    // Hiện quảng cáo ngay khi vào trang (fix lỗi reload)
+    // Hiện quảng cáo ngay khi vào trang
     window.onload = function() {
       showAd();
     };
 
-    // Khi nhấn nút X → tắt quảng cáo, chuyển sang Shopee, và hẹn lại sau 2 phút
-    closeBtn.onclick = function() {
+    // Hàm xử lý chung cho cả nút X và nút "Nhận khuyến mại"
+    function goToShopee() {
       hideAd();
       window.location.href = "https://shorten.asia/JbGTS2fv";
       setTimeout(showAd, 120000); // hiện lại sau 2 phút
-    };
+    }
 
-    // Khi nhấn nút "Nhận khuyến mại" → chuyển sang Shopee
-    dealBtn.onclick = function() {
-      window.location.href = "https://shorten.asia/JbGTS2fv";
-    };
+    // Gán sự kiện cho cả hai nút
+    closeBtn.onclick = goToShopee;
+    dealBtn.onclick = goToShopee;
   </script>
 </body>
 </html>
